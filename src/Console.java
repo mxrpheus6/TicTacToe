@@ -12,6 +12,7 @@ public class Console {
     }
 
     private void play() {
+        System.out.println("Created by mxrpheus");
         System.out.println("Starting a new game...");
 
         while (true) {
@@ -47,15 +48,21 @@ public class Console {
 
     private void printGameStatus() {
         Board.State[][] tempBoard = board.getBoard();
+        System.out.println("Turn " + board.getPlayerTurn());
         for (int row = 0; row < Board.BOARD_LENGTH; row++) {
             for (int col = 0; col < Board.BOARD_LENGTH; col++) {
                 if (tempBoard[row][col] == Board.State.Empty) {
-                    System.out.print('-');
+                    System.out.print("   ");
                 } else {
-                    System.out.print(tempBoard[row][col]);
+                    System.out.print(" " + tempBoard[row][col] + " ");
+                }
+                if (col != Board.BOARD_LENGTH - 1) {
+                    System.out.print("|");
                 }
             }
             System.out.println();
+            if (row != Board.BOARD_LENGTH - 1)
+                System.out.println("---|---|---");
         }
     }
 
@@ -84,7 +91,7 @@ public class Console {
 
     private boolean promptTryAgain() {
         while (true) {
-            System.out.println("Would you like to start a new game? (y/n):");
+            System.out.print("Would you like to start a new game? (y/n):");
             String choice = sc.next();
             if (choice.equals("y")) {
                 return true;
