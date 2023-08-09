@@ -8,14 +8,12 @@ public class Board {
     private State[][] board;
     private State playerTurn;
     private State winner;
-    private HashSet<Integer> movesAvailable;
 
     private int moveCount;
     private boolean gameOver;
 
     Board() {
         board = new State[BOARD_LENGTH][BOARD_LENGTH];
-        movesAvailable = new HashSet<>();
         reset();
     }
 
@@ -24,12 +22,6 @@ public class Board {
             for (int col = 0; col < BOARD_LENGTH; col++) {
                 board[row][col] = State.Empty;
             }
-        }
-
-        movesAvailable.clear();
-
-        for (int i = 0; i <  BOARD_LENGTH * BOARD_LENGTH; i++) {
-            movesAvailable.add(i);
         }
     }
 
@@ -56,6 +48,11 @@ public class Board {
             return false;
         }
 
+        moveCount++;
+        if (moveCount == BOARD_LENGTH * BOARD_LENGTH) {
+            gameOver = true;
+        }
+
         checkRow(x);
         checkCol(y);
         checkDiagFromTopRight();
@@ -78,10 +75,6 @@ public class Board {
             throw new IllegalStateException("Game is not over yet!");
         }
         return winner;
-    }
-
-    public HashSet<Integer> getAvailableMoves() {
-        return movesAvailable;
     }
 
     public int getMoveCount() {
