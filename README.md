@@ -1,2 +1,2 @@
 # TicTacToe
- Simple realization of tic-tac-toe game
+Simple realization of tic-tac-toe game
